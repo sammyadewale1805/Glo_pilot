@@ -5,8 +5,9 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  SafeAreaView,
 } from "react-native";
-import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Callout, Marker } from "react-native-maps";
 import React, { useRef, useMemo, useState, useEffect } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { AntDesign, MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
@@ -17,6 +18,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import SearchScreen from "./SearchScreen";
 import { LocationContext } from "../../../hooks/Usercontext/LocationHook";
+import STATUSBAR from "../../../widget/STATUSBAR";
 
 const HomeScreen = (): React.JSX.Element => {
   const mapRegion = React.useContext(LocationContext);
@@ -100,26 +102,26 @@ const HomeScreen = (): React.JSX.Element => {
     />
   ) : (
     <View style={styles.container}>
+      <SafeAreaView>
+        <STATUSBAR />
       <MapView
-        // showsTraffic={true}
         initialRegion={mapRegion.mapRegion}
-        // onRegionChange={onRegionChange}
+        followsUserLocation={true}
+         // onRegionChange={onRegionChange}
         showsBuildings={true}
         userLocationUpdateInterval={5000}
         showsUserLocation={isOnline ? false : true}
-        followsUserLocation={true}
+        showsCompass={false}
         userLocationPriority="high"
-        // provider={PROVIDER_GOOGLE}
         region={mapRegion.mapRegion}
         style={styles.map}
         ref={mapRef}
-        // showsMyLocationButton
       >
         <Marker
           pinColor="#0000ff"
           coordinate={mapRegion.mapRegion}
           title="Marker"
-          onDragEnd={(e) => setDragableMarker(e.nativeEvent.coordinate)}
+          onDragEnd={(e: any) => setDragableMarker(e.nativeEvent.coordinate)}
         >
           <Callout>
             {/* <MaterialIcons name="location-city" size={24} color="black" /> */}
@@ -197,6 +199,7 @@ const HomeScreen = (): React.JSX.Element => {
       <TouchableOpacity onPress={userLocation} style={styles.locationIcon}>
         <MaterialIcons name="my-location" size={wp(8)} color="black" />
       </TouchableOpacity>
+      </SafeAreaView>
     </View>
   );
 };

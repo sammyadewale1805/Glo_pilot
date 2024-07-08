@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ type, children }) => {
         </View>
       ) : (
         <View>
-          <View className="flex flex-row items-center mt-10 space-x-28 px-4">
+          <View className="flex flex-row items-center mt-10 space-x-28">
             <BackButton />
             <Text className="text-xl font-bold">{children}</Text>
           </View>

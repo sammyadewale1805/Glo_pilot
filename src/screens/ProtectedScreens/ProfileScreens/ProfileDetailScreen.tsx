@@ -18,7 +18,6 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import React from "react";
-import BackButton from "../../../widget/Buttons/BackButton";
 import ReviewCard from "../../../component/Profile/ReviewCard";
 import { useNavigation } from "@react-navigation/native";
 import { UserInfoContext } from "../../../Context";
@@ -31,21 +30,10 @@ const ProfileDetailScreen = () => {
   const user = UserInfoContext();
   console.log("profile pic in profile screen", baseURL + user?.user.email);
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: "white", marginBottom: wp(5) }}
+    <View
+      style={{ flex: 1, backgroundColor: "white" }}
     >
-      <STATUSBAR />
-      <View style={styles.headerContainer}>
-        <BackButton />
-        <Text style={{ fontSize: wp(5), fontWeight: "500" }}>Profile</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("EditProfile")}
-          style={styles.editButton}
-        >
-          <Entypo name="edit" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
-      <View style={{ alignItems: "center", marginTop: wp(8) }}>
+      <View style={{ alignItems: "center", marginTop: wp(5) }}>
         <View>
           {/* <Image
             style={styles.ImageItem}
@@ -181,7 +169,7 @@ const ProfileDetailScreen = () => {
           </View>
         </ScrollView>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

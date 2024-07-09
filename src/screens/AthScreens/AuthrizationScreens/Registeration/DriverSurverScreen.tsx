@@ -3,11 +3,57 @@ import React from 'react'
 import Header from '../../../../widget/Header'
 import Responsiveness from '../../../../helpers/Responsiveness'
 import ProgressBar from '../../../../component/Verification/ProgressBar'
-import { RoundedCheckbox } from 'react-native-rounded-checkbox'
 import SurveyItem from '../../../../component/Registeration/SurveyItem'
 import Btn from '../../../../widget/Btn'
+import { WhyDriveGlopilots, HowManyHours, WhenToDrive, ApplyToDriveWihtOtherApp } from '../../../../component/Registeration/SurveyItem'
+import { useNavigation } from '@react-navigation/native'
 
 const DriverSurverScreen = () => {
+    const navigation = useNavigation() as any;
+    const [SuveyState, setSurveyState] = React.useState({
+        WhyDriveGlopilots,
+        HowManyHours,
+        WhenToDrive,
+        ApplyToDriveWihtOtherApp
+    })
+    const handleWhyDriveGlopilots = (id: number) => {
+        console.log("handling callback");
+        setSurveyState((prev) => ({
+          ...prev,
+          WhyDriveGlopilots: prev.WhyDriveGlopilots.map((data) =>
+            data.id === id ? { ...data, checked: false } : data
+          ),
+        }));
+      };
+    const handleHowManyHours = (id: number) => {
+        console.log("handling callback");
+        setSurveyState((prev) => ({
+          ...prev,
+          HowManyHours: prev.HowManyHours.map((data) =>
+            data.id === id ? { ...data, checked: false } : data
+          ),
+        }));
+      };
+    const handleWhenToDrive = (id: number) => {
+        console.log("handling callback");
+        setSurveyState((prev) => ({
+          ...prev,
+          WhenToDrive: prev.WhenToDrive.map((data) =>
+            data.id === id ? { ...data, checked: false } : data
+          ),
+        }));
+      };
+    const handleApplyToDriveWihtOtherApp = (id: number) => {
+        console.log("handling callback");
+        setSurveyState((prev) => ({
+          ...prev,
+          ApplyToDriveWihtOtherApp: prev.ApplyToDriveWihtOtherApp.map((data) =>
+            data.id === id ? { ...data, checked: false } : data
+          ),
+        }));
+      };
+      
+      
   return (
     <ScrollView showsVerticalScrollIndicator={false} className='flex flex-1 bg-white px-4'>
       <View style={{marginTop: Responsiveness.getResponsiveWidth(5)}}>
@@ -21,11 +67,9 @@ const DriverSurverScreen = () => {
         </Text>
 
         <View>
-            <SurveyItem type='rounded' children={"Be my own boss"} />
-            <SurveyItem type='rounded' children={"Make extra money on the side"} />
-            <SurveyItem type='rounded' children={"Save for a specific purchase"} />
-            <SurveyItem type='rounded' children={"Meet new people"} />
-            <SurveyItem type='rounded' children={"Need something temporary"} />
+            {SuveyState.WhyDriveGlopilots?.map((data: any)=> (
+                <SurveyItem key={data.id} type='rounded' children={data.text} isChecked={data.checked} callback={handleWhyDriveGlopilots} id={data.id} />
+            ))}
         </View>
       </View>
       <View style={{marginTop: Responsiveness.getResponsiveWidth(5)}}>
@@ -35,11 +79,9 @@ const DriverSurverScreen = () => {
         </Text>
 
         <View>
-            <SurveyItem type='rounded' children={"Fewer than 5 hours"} />
-            <SurveyItem type='rounded' children={"5-15 hours"} />
-            <SurveyItem type='rounded' children={"6-20 hours"} />
-            <SurveyItem type='rounded' children={"21-35 hours"} />
-            <SurveyItem type='rounded' children={"36+ hours"} />
+            {SuveyState.HowManyHours?.map((data)=> (
+                <SurveyItem key={data.id} type='rounded' children={data.text} isChecked={data.checked} callback={handleHowManyHours} id={data.id}/>
+            ))}
         </View>
       </View>
       <View style={{marginTop: Responsiveness.getResponsiveWidth(5)}}>
@@ -48,13 +90,9 @@ const DriverSurverScreen = () => {
         </Text>
 
         <View>
-            <SurveyItem type='box' children={"Morning"} />
-            <SurveyItem type='box' children={"Afternoon"} />
-            <SurveyItem type='box' children={"Evening"} />
-            <SurveyItem type='box' children={"Night"} />
-            <SurveyItem type='box' children={"Weekend"} />
-            <SurveyItem type='box' children={"Weekday"} />
-            <SurveyItem type='box' children={"All time of the day"} />
+            {SuveyState.WhenToDrive.map((data)=> (
+                <SurveyItem key={data.id} type='box' children={data.text} isChecked={data.checked} id={data.id} />
+            ))}
         </View>
       </View>
       <View style={{marginTop: Responsiveness.getResponsiveWidth(5)}}>
@@ -64,15 +102,13 @@ const DriverSurverScreen = () => {
         </Text>
 
         <View>
-            <SurveyItem type='rounded' children={"No, Just Glopilots"} />
-            <SurveyItem type='rounded' children={"Yes, Rideshare apps"} />
-            <SurveyItem type='rounded' children={"Yes, Delivery Apps"} />
-            <SurveyItem type='rounded' children={"21-35 hours"} />
-            <SurveyItem type='rounded' children={"Yes, Both rideshare and delivery apps"} />
+            {SuveyState.ApplyToDriveWihtOtherApp.map((data)=> (
+                <SurveyItem key={data.id} type="rounded" children={data.text} isChecked={data.checked}id={data.id} />
+            ))}
         </View>
       </View>
       <View className='items-center my-8'>
-        <Btn type='action' label={"Next"}/>
+        <Btn type='action' label={"Next"} callback={()=> navigation.navigate("vehicle-ownership")}/>
       </View>
     </ScrollView>
   )

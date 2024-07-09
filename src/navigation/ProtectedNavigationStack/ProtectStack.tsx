@@ -6,7 +6,6 @@ import RecommendationScreen from "../../screens/ProtectedScreens/HomeScreens/Rec
 import MessageScreen from "../../screens/ProtectedScreens/MessageScreens/MessageScreen";
 import TripDetailScreen from "../../screens/ProtectedScreens/MessageScreens/TripDetailScreen";
 import OpportunityScreen from "../../screens/ProtectedScreens/OpportunityScreens/OpportunityScreen";
-import WalletScreen from "../../screens/ProtectedScreens/WalletScreens/WalletScreen";
 import ProfileStack from "./ProfileNavigationSack/ProfileStack";
 import EarningStack from "./EarnigNavigator";
 import HelpNavigator from "./HelpNavigator";
@@ -17,6 +16,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import CashoutScreen from "../../screens/ProtectedScreens/WalletScreens/CashoutScreen";
+import WalletScreen from "../../screens/ProtectedScreens/WalletScreens/WalletScreen";
 
 const Stack = createStackNavigator();
 const ProtectStack = () => {
@@ -54,6 +55,7 @@ const ProtectStack = () => {
          }}
        />
       <Stack.Screen name="Wallet" component={WalletScreen} />
+      <Stack.Screen name="cashout" component={CashoutScreen}/>
       <Stack.Screen name="Profiles" component={ProfileStack} />
       <Stack.Screen name="Earnings" component={EarningStack} />
       <Stack.Screen name="Helproute" component={HelpNavigator} />

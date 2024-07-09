@@ -10,7 +10,7 @@ export default function SplashScreen(){
     const snapPoints = useMemo(()=> ["27%"], []);
     const navigation = useNavigation() as any;
     return <View className='flex flex-1 bg-[#4460EF] items-center justify-center'>
-        <STATUSBAR />
+        {/* <STATUSBAR  /> */}
         <Image className='overflow-hidden' source={require("../../../assets/splashlogo.png")} />
         <BottomSheet ref={bottomSheetRef} snapPoints={snapPoints}>
             <BottomSheetView>

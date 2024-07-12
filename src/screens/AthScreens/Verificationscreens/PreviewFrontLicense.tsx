@@ -10,7 +10,6 @@ import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../widget/Buttons/BackButton";
 import Btn from "../../../widget/Btn";
 import { useVerificationContext } from "../../../Context";
-import LottieView from "lottie-react-native";
 import Loading from "../../../widget/Loading";
 
 interface PreviewProps {

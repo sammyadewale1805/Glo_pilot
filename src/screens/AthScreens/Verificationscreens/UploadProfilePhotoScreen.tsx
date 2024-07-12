@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const UploadProfilePhotoScreen = () => {
   const [loading, setIsLoading] = useState(false);
-  const [facing, setFacing] = useState("front");
+  const [facing, setFacing] = useState<"front" | "back">("front");
   const [photo, setPhoto] = useState() as any;
   const [image, setImage] = useState<string>();
   const [permission, requestPermission] = useCameraPermissions();

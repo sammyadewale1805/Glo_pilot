@@ -22,7 +22,7 @@ const WalletScreen = () => {
             <PayoutItems amount={"$210.45"} date={"Apr 01, 2024"}/>
         </View>
         <View style={{marginTop: Responsiveness.getResponsiveHeight(2)}} className='py-5 border-b-[1.5px] border-[#EEEE]'>
-            <TouchableOpacity onPress={()=> console.log("pay-method")} className='flex flex-row items-center space-x-2'>
+            <TouchableOpacity onPress={()=> navigation.navigate("payment-method")} className='flex flex-row items-center space-x-2'>
                 <Ionicons name="card" size={24} color="black" />
                 <Text style={{fontSize: Responsiveness.getResponsiveWidth(3.5)}}>Payments Methods</Text>
             </TouchableOpacity>

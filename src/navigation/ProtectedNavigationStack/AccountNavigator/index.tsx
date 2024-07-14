@@ -23,9 +23,14 @@ import TaxInformationScreen from "../../../screens/ProtectedScreens/AccountScree
 import ManageAccountScreen from "../../../screens/ProtectedScreens/AccountScreens/ManageAccountScreen";
 import AccountPhoneNumberScreen from "../../../screens/ProtectedScreens/AccountScreens/AccountPhoneNumberScreen";
 import AccountPhoneNumberOPTScreen from "../../../screens/ProtectedScreens/AccountScreens/AccountPhoneNumberOPTScreen";
-import AccountSecurityScreen from "../../../screens/ProtectedScreens/AccountScreens/AccountSecurityScreen";
+import AccountSecurityScreen from "../../../screens/ProtectedScreens/AccountScreens/Security/AccountSecurityScreen";
 import TwoStepVerificationScreen from "../../../screens/ProtectedScreens/AccountScreens/TwoStepVerificationScreen";
 import AccountVerificationPassword from "../../../screens/ProtectedScreens/AccountScreens/AccountVerificationPassword";
+import VerifyTextMessageScreen from "../../../screens/ProtectedScreens/AccountScreens/Security/VerifyTextMessageScreen";
+import PrivacyScreen from "../../../screens/ProtectedScreens/AccountScreens/Privacy/PrivacyScreen";
+import AddressScreen from './../../../screens/ProtectedScreens/AccountScreens/Address/AddressScreen';
+import AppSettingScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/AppSettingScreen";
+import SoundScreen from "../../../screens/ProtectedScreens/AccountScreens/AppSetting/SoundScreen";
 
 const AccountNavigator = createStackNavigator();
 
@@ -49,6 +54,11 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: "", headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="otp-verification" component={AccountPhoneNumberOPTScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Security', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="security" component={AccountSecurityScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: '2-Step Verification', headerRight: ()=> <CancelBtn />}} name="twoStep-verification" component={TwoStepVerificationScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: '2-Step Verification', headerRight: ()=> <CancelBtn />}} name="verifyText-Message" component={VerifyTextMessageScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Privacy', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="privacy-center" component={PrivacyScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Address', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="edit-address" component={AddressScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'App Settings', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="app-settings" component={AppSettingScreen}/>
+        <AccountNavigator.Screen options={{ headerTitle: 'Sounds', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="sound" component={SoundScreen}/>
         <AccountNavigator.Screen options={{headerShown: false}} name="account-password" component={AccountVerificationPassword}/>
     </AccountNavigator.Navigator>
 }

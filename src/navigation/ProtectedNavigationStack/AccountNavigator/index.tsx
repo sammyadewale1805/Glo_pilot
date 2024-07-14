@@ -25,6 +25,7 @@ import AccountPhoneNumberScreen from "../../../screens/ProtectedScreens/AccountS
 import AccountPhoneNumberOPTScreen from "../../../screens/ProtectedScreens/AccountScreens/AccountPhoneNumberOPTScreen";
 import AccountSecurityScreen from "../../../screens/ProtectedScreens/AccountScreens/AccountSecurityScreen";
 import TwoStepVerificationScreen from "../../../screens/ProtectedScreens/AccountScreens/TwoStepVerificationScreen";
+import AccountVerificationPassword from "../../../screens/ProtectedScreens/AccountScreens/AccountVerificationPassword";
 
 const AccountNavigator = createStackNavigator();
 
@@ -48,6 +49,7 @@ export default function AccountStack() {
         <AccountNavigator.Screen options={{ headerTitle: "", headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="otp-verification" component={AccountPhoneNumberOPTScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: 'Security', headerTitleAlign: 'center', headerLeft: ()=> <View className="ml-4"><BackButton /></View>}} name="security" component={AccountSecurityScreen}/>
         <AccountNavigator.Screen options={{ headerTitle: '2-Step Verification', headerRight: ()=> <CancelBtn />}} name="twoStep-verification" component={TwoStepVerificationScreen}/>
+        <AccountNavigator.Screen options={{headerShown: false}} name="account-password" component={AccountVerificationPassword}/>
     </AccountNavigator.Navigator>
 }
 

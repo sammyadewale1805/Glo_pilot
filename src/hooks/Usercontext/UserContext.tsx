@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useCallback, useEffect, Dispatch } from "react";
+import React, { useCallback, useEffect, Dispatch, useState, SetStateAction } from "react";
 import { baseURL, config, getUserConfig } from "../../Services/authorization";
 import { initialUserState, UserInterface } from "./UserInterface";
 import { ToastAndroid, Alert } from "react-native";
@@ -18,7 +18,8 @@ interface UserContextProps {
   getUser: () => Promise<void>;
   loginUser: (email: String, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>)=> Promise<void>;
   handleLicenseSubmit: HandleSubmitType
-  handleProfilePhotoSubmit: HandleSubmitType
+  handleProfilePhotoSubmit: HandleSubmitType,
+  appLoading: boolean
 }
 
 export const useUserContext = React.createContext<UserContextProps | undefined>(
@@ -30,6 +31,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [user, setUser] = React.useState<UserInterface>(initialUserState);
   console.log("User from hook...", user)
+  const [appLoading, setAppLoading] = useState<boolean>(false)
   const navigation = useNavigation() as any
 
   const updateUser = useCallback((name: string, email: string) => {
@@ -69,13 +71,15 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   },[])
 
   const getUser = async () => {
+    setAppLoading(true)
     try {
       const res = await axios.get(baseURL + "user/get-user", getUserConfig);
       // console.log("Response data:", res.data);
       setUser(res?.data.user);
       console.log("User data from api... ",res?.data.user)
+      setAppLoading(false)
 
-      res.data && setUser(res.data.user);
+      // res.data && setUser(res.data.user);
 
       if (res.data && res.data.user && res.data.user.profilePic) {
         const profilePicUrl = `${baseURL}${res.data.user.profilePic}`;
@@ -83,9 +87,11 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
         console.log("Image saved successfully");
       } else {
         console.log("User data or profilePic not found in response");
+        setAppLoading(false)
       }
     } catch (err) {
       console.error("Error fetching user data:", err);
+      setAppLoading(false)
     }
   };
 
@@ -223,7 +229,7 @@ export const UserContext: React.FC<{ children: React.ReactNode }> = ({
   }, []);
   return (
     <useUserContext.Provider
-      value={{ user, updateUser, updateUserProfile, getUser, loginUser, handleLicenseSubmit, handleProfilePhotoSubmit }}
+      value={{ user, updateUser, updateUserProfile, getUser, loginUser, handleLicenseSubmit, handleProfilePhotoSubmit, appLoading }}
     >
       {children}
     </useUserContext.Provider>

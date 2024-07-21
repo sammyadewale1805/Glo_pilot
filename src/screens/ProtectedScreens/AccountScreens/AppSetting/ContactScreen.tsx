@@ -41,10 +41,10 @@ const ContactScreen = () => {
     );
 
     useEffect(() => {
-      const filtered = myContact.filter((contact: any) =>
+      const filtered = AppSettings?.contacts && AppSettings?.contacts.filter((contact: any) =>
         contact?.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      AppSettings?.emergencyContact.updateContacts(filtered, 'filter')
+      AppSettings?.emergencyContact?.updateContacts(filtered, 'filter')
       /*setFilteredContacts(filtered); */// Update filteredContacts when searchQuery changes
     }, [searchQuery, AppSettings?.emergencyContact.contacts]);
 
@@ -81,7 +81,7 @@ const ContactScreen = () => {
       keyExtractor={(item: any) => item?.id}
       renderItem={renderItem}
     />
-    {selectedContacts.length > 0 && <View className='items-center bg-white mb-2'>
+    {AppSettings?.selectedContacts && AppSettings?.selectedContacts.length > 0 && <View className='items-center bg-white mb-2'>
       <Btn type='action' label={"Save changes"}/>
     </View>}
   </View>

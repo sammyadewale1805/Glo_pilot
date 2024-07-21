@@ -75,6 +75,7 @@ export interface CommunicationSettingsType {
     callOrChat: boolean;
     call: boolean;
     chat: boolean;
+    toggleCheck(property: 'callOrChat' | 'call' | 'chat'): void;
 }
   
  export type EmergencyContactType = {
@@ -94,11 +95,15 @@ export interface SpeedLimitItemType {
 export interface SpeedLimitSettingsType {
     showSpeedLimit: boolean;
     speedLimitBelow55mph: SpeedLimitItemType[];
+    toggleSpeedLimit: (value: boolean)=> void
 }
 
 export interface RideCheckSettingsType {
     rideCheckNotification: boolean;
     crashDetect: boolean;
+    togglerideCheckNotification: (value: boolean)=> void;
+    togglecrashDetect: (value: boolean)=> void;
+
 }
 
 // export const defaultNavigationSettings: NavigationSettingsType = {
